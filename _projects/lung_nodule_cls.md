@@ -40,7 +40,7 @@ Lung CT 영상내에서 Nodule의 악성도를 판별하는 기준중의 하나�
 
 3. 여러개의 모델을 Training하여 Ensemble 기법을 활용하여 약간의 성능향상
 
-   <img src="../../assets/img/image-20220806030139034.png" alt="image-20220806030139034" style="zoom: 25%;" />
+   <img src="../../assets/img/image-20220806030139034.png" alt="image-20220806030139034" style="zoom: 40%;" />
 
 ## Achievement
 
