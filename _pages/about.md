@@ -9,7 +9,7 @@ profile:
   image: prof_pic.jpg
   image_cicular: false # crops the image to make it circular
   address: >
-    <p>#903, 311, Gangnam-daero, Seocho-gu</p>
+    <p>311, Gangnam-daero, Seocho-gu</p>
     <p>Seoul, Korea</p>
 
 news: false  # includes a list of news items
@@ -23,4 +23,4 @@ Put your address / P.O. box / other info right below your picture. You can also 
 
 Link to your social media connections, too. This theme is set up to use [Font Awesome icons](http://fortawesome.github.io/Font-Awesome/) and [Academicons](https://jpswalsh.github.io/academicons/), like the ones below. Add your Facebook, Twitter, LinkedIn, Google Scholar, or just disable all of them. -->
 
-I am AI & computer vision researcher and a leader of algorithm development team of Monitor Corporation. I received MS degree in Department of Bioengineering from Seoul National University. I worked in LG display as a optical compensation algorithm developer. I received my bachelor degree in Electrical Engineering from Hanyang University. My general research interest lies in computer vision and machine learning.
+I am AI researcher and a leader of AI R&D team of Monitor Corporation. I received MS degree in Department of Bioengineering from Seoul National University. I worked in LG display as a optical compensation algorithm developer. I received my bachelor degree in Electrical Engineering from Hanyang University. My general research interest lies in computer vision and machine learning.
