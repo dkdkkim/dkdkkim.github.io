@@ -53,22 +53,22 @@
     - title: OLED optical compensation algorithm
       items:
         - LG Display
-        - Used: C++, mfc
+        - C++, mfc
         - Design the algorithm for operating OLED module at target status
     - title: Lung CT nodule type classification
       items:
-        - Used: Python, tensorflow
+        - Python, tensorflow
         - Built a 3D DNN model for classfying 3 types of lung cancers on CT image
         - A CNN model, attention modules and an ensemble  method are applied
     - title: Weakly Supervised Branch Network With Template Mask for Classifying Masses in 3D Automated Breast Ultrasound
         items:
           - WACV 2022 accepted(1st author)
-          - Used: Python, tensorflow
+          - Python, tensorflow
           - a novel branch network architecture incorporating segmentation information of masses in the training process
     - title: A Conservative Approach for Unbiased Learning on Unknown Biases
         items:
           - CVPR 2022 accepted(co 1st author)
-          - Used: Python, Pytorch
+          - Python, Pytorch
           - De-bias approach that does not necessitate a predefined bias
 
 - title: Open Source Projects
