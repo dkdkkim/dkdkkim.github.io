@@ -4,7 +4,9 @@
     - name: Full Name
       value: Daekyung Kim
     - name: Date of Birth
-      value: 3rd March 1989
+      value: 7th March 1989
+    - name: Skills
+      value: Python, Tensorflow, Pytorch, Mysql
     - name: Languages
       value: Korean, English
 
@@ -42,7 +44,7 @@
 
     - title: AI researcher
       institution: Monitor corporation, Seoul, Korea
-      year: 2021.04-now
+      year: 2021.04 - now
       description:
         - AI researcher & Team leader
         - Developing DNN model for analysizing medical image
