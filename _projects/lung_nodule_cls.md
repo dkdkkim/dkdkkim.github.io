@@ -47,7 +47,7 @@ Lung CT 영상내에서 Nodule의 악성도를 판별하는 기준중의 하나�
 성능평가 후 CAD(Computer aided detection) system에 integration 됨
 
 |             | Solid | Part solid | Non solid |
-| ----------- | ----- | ---------- | --------- |
+| ----------- | ---------- | ---------- | ---------- |
 | Sensitivity | 94.3% | 79.2       | 64.5%     |
 | Specificity | 89.1% | 93.8%      | 94.2%     |
 | Accuracy    | 92.5% | 91.6%      | 88.4%     |
