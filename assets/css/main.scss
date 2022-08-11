@@ -13,3 +13,14 @@ $max-content-width: {{ site.max_width }};
   "base",
   "distill"
 ;
+
+@font-face {
+  font-family: 'Noto Sans KR';
+  src: url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR&display=swap');
+  font-weight: normal;
+  font-style: normal;
+}
+
+body {
+  font-family: 'Noto Sans KR'
+}
