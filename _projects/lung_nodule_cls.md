@@ -20,7 +20,15 @@ git repository link: [Nodule type classification](https://github.com/dkdkkim/nod
 
 Lung CT 영상내에서 Nodule의 악성도를 판별하는 기준중의 하나인 Nodule Type(solid / part-solid / non-solid) 를 분류하는 딥러닝 모델 개발하는 것을 목표로 한다.
 
-<p align="center"><img src="../../assets/img/image-20220806025535400.png" alt="image-20220806025535400" style="zoom:67%;" />
+<!-- <p align="center"><img src="../../assets/img/image-20220806025535400.png" alt="image-20220806025535400" style="zoom:67%;" /> -->
+<div class="row">
+    <div class="col-sm mt-3 mt-md-0">
+        {% include figure.html path="assets/img/nodule_type_01.png" title="lung nodule type" class="img-fluid rounded z-depth-1" %}
+    </div>
+</div>
+<div class="caption">
+    3 types of lung nodule
+</div>
 
 프로젝의 목표는 아래와 같다.
 
@@ -45,8 +53,18 @@ Lung CT 영상내에서 Nodule의 악성도를 판별하는 기준중의 하나�
 2. Attention module을 구현 및 적용하여 성능을 향상시킴
 3. 여러개의 모델을 Training한 후 Ensemble 기법을 활용하여 약간의 성능향상
 
-   <p align="center"><img src="../../assets/img/image-20220806030139034.png" alt="image-20220806030139034" style="zoom: 40%;" />
-   
+   <!-- <p align="center"><img src="../../assets/img/image-20220806030139034.png" alt="image-20220806030139034" style="zoom: 40%;" /> -->
+
+<div class="row">
+    <div class="col-sm mt-3 mt-md-0">
+        {% include figure.html path="assets/img/nodule_type_02.png" title="Overview" class="img-fluid rounded z-depth-1" %}
+    </div>
+</div>
+<div class="caption">
+    Overview of lung nodule type classification model
+</div>
+
+
  * * *
 
 ## Achievement
