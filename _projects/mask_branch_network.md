@@ -28,7 +28,9 @@ paper link : [Weakly supervised Branch Network with Template Mask for Classifyin
 
 
 <!-- <p align="center"><img src="../../assets/img/mask_branch_network_01.png" alt="mask branch network intro" style="zoom:67%;" /> -->
-<p align="center"><img src="../../assets/img/mask_branch_network_01.png" alt="mask branch network intro" width="60%" height="30%">
+<div class="row>
+  <p align="center"><img src="../../assets/img/mask_branch_network_01.png" alt="mask branch network intro" width="60%" height="30%">
+</div>
 <!-- ![intro](../../assets/img/mask_branch_network_01.png){: width="100%" height="100%"} -->
 
 * * *
