@@ -48,7 +48,7 @@ paper link : [Weakly supervised Branch Network with Template Mask for Classifyin
 - branch netwokr는 이전의 연구들에서 multi-task learning을 위한 방법으로 제안되었다. 본 연구에서 branch network의 역할은 spatial information을 main network에 integration 하는 데에 있다.
 - mask branch network는 training step에서만 사용되며 inference 시에는 사용하지 않으므로 추가적인 computational cost 문제는 크지 않다.
 
-<p align="center"><img src="../../assets/img/mask_branch_network_02.png" alt="main_network" style="zoom:30%;" />
+<p align="center"><img src="../../assets/img/mask_branch_network_02.png" alt="main_network" style="zoom:40%;"></img>
 
 
 1. **Template mask**
@@ -63,13 +63,13 @@ paper link : [Weakly supervised Branch Network with Template Mask for Classifyin
 1. **Qualitative result**
 - Backbone network를 ResNet/DenseNet으로 세팅하여 평가하였고 두가지 방법 모두 제한된 조건내에서 성능향상을 확인할 수 있었다.
 
-<p align="center"><img src="../../assets/img/mask_branch_network_04.png" alt="template_mask" width="80%" height="30%" title="overview" />
+<p align="center"><img src="../../assets/img/mask_branch_network_04.png" alt="template_mask" width="80%" height="30%" title="overview"></img>
 
 
 2. **Quantitative result**
 - Traning된 모델을 CAM(Class Activation Map)으로 비교해보았을 때에도 제안된 모델에서 병변에 더 focusing 하고 있음을 확인할 수 있다.
 
-<p align="center"><img src="../../assets/img/mask_branch_network_05.png" alt="template_mask" width="80%" height="30%" title="overview" />
+<p align="center"><img src="../../assets/img/mask_branch_network_05.png" alt="template_mask" width="80%" height="30%" title="overview"></img>
 
 
 ### **Conclusion**
