@@ -27,6 +27,7 @@ paper link : [Weakly supervised Branch Network with Template Mask for Classifyin
 
 <p align="center"><img src="dkdkkim.github.io/assets/img/mask_branch_network_01.png" alt="mask branch network intro" style="zoom:67%;" />
 
+
 * * *
 ### **Role in Project**
 
@@ -49,10 +50,12 @@ paper link : [Weakly supervised Branch Network with Template Mask for Classifyin
 
 <p align="center"><img src="../../assets/img/mask_branch_network_02.png" alt="main_network" style="zoom:30%;" />
 
+
 1. **Template mask**
 - Object(mass)의 segmenation map을 만드는 데에는 전문가의 작업이 필요하기 때문에 시간과 비용이 많이 필요하기 때문에 어려움이 있다. 이를 극복하기 위해서 Text(판독문)의 정보를 활용한 Template mask를 제안하였다.
 
 <p align="center"><img src="../../assets/img/mask_branch_network_03.png" width="80%" height="30%" title="overview" alt="overview"></img>
+
 
  * * *
 
@@ -62,10 +65,12 @@ paper link : [Weakly supervised Branch Network with Template Mask for Classifyin
 
 <p align="center"><img src="../../assets/img/mask_branch_network_04.png" alt="template_mask" width="80%" height="30%" title="overview" />
 
+
 2. **Quantitative result**
 - Traning된 모델을 CAM(Class Activation Map)으로 비교해보았을 때에도 제안된 모델에서 병변에 더 focusing 하고 있음을 확인할 수 있다.
 
 <p align="center"><img src="../../assets/img/mask_branch_network_05.png" alt="template_mask" width="80%" height="30%" title="overview" />
+
 
 ### **Conclusion**
 Breast mass의 특성을 활용한 Template mask와 Spatial information을 효과적으로 feature extractor에 integration 하도록 하는 Mask branch network는 ABUS 영상의 병변을 분류하는 모델의 학습에 적용되어 성능향상을 확인할 수 있었다.
