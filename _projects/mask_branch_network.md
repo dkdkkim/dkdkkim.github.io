@@ -17,6 +17,8 @@ category: work
 git repository link: [Mask branch network repository](https://github.com/dkdkkim/maskbranchnetwork)
 
 paper link : [Weakly supervised Branch Network with Template Mask for Classifying Masses in 3D Automated Breast Ultrasound,WACV2022](https://openaccess.thecvf.com/content/WACV2022/html/Kim_Weakly_Supervised_Branch_Network_With_Template_Mask_for_Classifying_Masses_WACV_2022_paper.html)
+
+
  * * *
 ### **Project Outline**
 
@@ -25,7 +27,7 @@ paper link : [Weakly supervised Branch Network with Template Mask for Classifyin
 이런 한계점들을 극복하기 위해서 본 연구에서는 ABUS내에서 병변을 구분하는 classification 모델을 효율적으로 training 하기위한 **Mask branch network**를 제안하며 이때 **Template mask** 를 활용한 Weakly-supervised sementation map을 동시에 제안한다.
 
 
-<p align="center"><img src="dkdkkim.github.io/assets/img/mask_branch_network_01.png" alt="mask branch network intro" style="zoom:67%;" />
+<p align="center"><img src="../../assets/img/mask_branch_network_01.png" alt="mask branch network intro" style="zoom:67%;" />
 
 
 * * *

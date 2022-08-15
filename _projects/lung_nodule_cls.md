@@ -20,7 +20,7 @@ git repository link: [Nodule type classification](https://github.com/dkdkkim/nod
 
 Lung CT 영상내에서 Nodule의 악성도를 판별하는 기준중의 하나인 Nodule Type(solid / part-solid / non-solid) 를 분류하는 딥러닝 모델 개발하는 것을 목표로 한다.
 
-<img src="../../assets/img/image-20220806025535400.png" alt="image-20220806025535400" style="zoom:67%;" />
+<p align="center"><img src="../../assets/img/image-20220806025535400.png" alt="image-20220806025535400" style="zoom:67%;" />
 
 프로젝의 목표는 아래와 같다.
 
@@ -46,6 +46,7 @@ Lung CT 영상내에서 Nodule의 악성도를 판별하는 기준중의 하나�
 3. 여러개의 모델을 Training한 후 Ensemble 기법을 활용하여 약간의 성능향상
 
    <p align="center"><img src="../../assets/img/image-20220806030139034.png" alt="image-20220806030139034" style="zoom: 40%;" />
+   
  * * *
 
 ## Achievement
