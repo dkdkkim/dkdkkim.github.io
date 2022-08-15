@@ -31,7 +31,7 @@ paper link : [Weakly supervised Branch Network with Template Mask for Classifyin
 <div class="row justify-content-sm-center">
     <div class="col-sm mt-3 mt-md-0">
         <!-- {% include figure.html path="assets/img/mask_branch_network_01.png" title="CAM" class="img-fluid rounded z-depth-1" %} -->
-        <img src="../../assets/img/mask_branch_network_01.png" alt="mask branch network intro" width="80%" height="30%">
+        <img src="../../assets/img/mask_branch_network_01.png" alt="mask branch network intro" width="60%" height="30%">
     </div>
 </div>
 <div class="caption">
