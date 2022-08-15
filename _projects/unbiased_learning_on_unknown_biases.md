@@ -37,11 +37,12 @@ paper link : [A Conservative Approach for Unbiased Learning on Unknown Biases
 
 ### **Approach**
 - Training dataset이 특정 분포에 대해서 biased 되어 있는 경우 Machine learning model은 편향될 가능성이 높다. 이런 경우에 model은 새로운 데이터에 대해서 편향된 상태로 예측을 하게 된다. 따라서 ML 또는 DL을 학습할 때에 Generalization 또는 Unbias는 중요한 요소라고 할 수 있다.
+- 예를들의 사람 얼굴의 성별을 구분하는 모델에서 대부분의 여성은 머리길이가 길기 때문에 머리긴 남성의 얼굴에 대해서 여성으로 잘못 예측하는 방향으로 모델이 학습될 수도 있다.
 - 기존의 Unbias 연구들은 bias에 대한 추가적인 정보(data 단위의 labeling 또는 feature 정보)를 요구한다. 본 연구에서는 추가적인 정보없이 모델이 편향되지 않도록 학습하는 모델을 제안한다.
 - [ImageNet-trained CNNs are biased towards texture](https://arxiv.org/abs/1811.12231)에서 CNN은 특정 feature에 의존적으로 학습되고 있음을 보여주었다. 여기서 의존하지 않고 있는 다른 feature들을 사용하면 unbias 할 수 있겠다는 아이디어를 얻게 되었다.
 
 <div>
-    <center><img src="ulub_01.png" alt="mask branch network intro" width="60%" height="60%"></center>
+    <center><img src="../../assets/img/ulub_01.png" alt="mask branch network intro" width="60%" height="60%"></center>
 </div>
 <div class="caption">
      <center>Feature dependence of the CNNs</center>
@@ -49,7 +50,7 @@ paper link : [A Conservative Approach for Unbiased Learning on Unknown Biases
 - CNN 모델에서 layer depth에 따른 Degree of bias(DOB)를 측정해본 결과 high level에서 더욱 bias 된 것을 확인할 수 있었고, low level feature와 balance있게 사용한다면 모델의 편향성이 감소될 수도 있겠다는 결론에 도달하게 되었다.
 
 <div>
-    <center><img src="ulub_02.png" alt="mask branch network intro" width="60%" height="60%"></center>
+    <center><img src="../../assets/img/ulub_02.png" alt="mask branch network intro" width="60%" height="60%"></center>
 </div>
 <div class="caption">
      <center>Degree of Bias</center>
@@ -57,70 +58,90 @@ paper link : [A Conservative Approach for Unbiased Learning on Unknown Biases
 ___
 
 ### **Method**
-- Bias 되어있는 데이터에서 효과적으로 학습하기 위한 **UBNet(Unbiasing Network)**를 제안하며, 전체적인 구조는 아래와 같다.
+- Bias 되어있는 데이터에서 효과적으로 학습하기 위한 **UBNet(Unbiasing Network)** 를 제안하며, 전체적인 구조는 아래와 같다.
 
 <div>
-    <center><img src="ulub_03.jpg" alt="mask branch network intro" width="70%" height="70%"></center>
+    <center><img src="../../assets/img/ulub_03.jpg" alt="mask branch network intro" width="70%" height="70%"></center>
 </div>
 <div class="caption">
      <center>The architecture of the proposed model, UBNet</center>
 </div>
 
-1. **Mask branch network**
-- branch netwokr는 이전의 연구들에서 multi-task learning을 위한 방법으로 제안되었다. 본 연구에서 branch network의 역할은 spatial information을 main network에 integration 하는 데에 있다.
-- mask branch network는 training step에서만 사용되며 inference 시에는 사용하지 않으므로 추가적인 computational cost 가 필요하지 않다.
+1. **Hierarchical Features**
+- CNN 모델에서 High level feature 뿐만 아니라 Low level feature 까지 균형있게 활용할 수 있도록 하기 위해서 Base model(feature extractor)에서 다른 depth level의 feature들을 추출하였다.
+- 각각 다른 level에서 추출된 feature들은 $f_{trans}$ 동일한 dimension으로 치환된다
 
-<!-- <p align="center"><img src="../../assets/img/mask_branch_network_02.png" alt="main_network" style="zoom:40%;"></img> -->
-<div class="row">
-    <div class="col-sm mt-3 mt-md-0">
-        {% include figure.html path="assets/img/mask_branch_network_02.png" title="Architecture" class="img-fluid rounded z-depth-1" %}
-    </div>
-</div>
-<div class="caption">
-     The architecture of mask branch network
-</div>
+2. **Orthogonal Regularization**
+- feature들이 fusion될 경우 기존의 CNN모델과 마찬가지로 High feature에 의존할 가능성 있기 때문에, **Group convolution** 을 적용하여 개별적으로 연산되도록 한다.
+- 서로 다른 group의 feature들의 독립성을 보장하기 위해서 **Orthogonality regularization** 을 적용하였다. 각각의 feature 사이의 orthogonality를 loss term에 추가하여 학습하면서 orthogonality가 높은 방향으로 학습되도록 유도하였다.
 
-1. **Template mask**
-- Object(mass)의 segmenation map을 만드는 데에는 전문가의 작업이 필요하기 때문에 시간과 비용이 많이 필요하기 때문에 어려움이 있다. 이를 극복하기 위해서 Text(판독문)의 정보를 활용한 Template mask를 제안하였다.
 
-<!-- <p align="center"><img src="../../assets/img/mask_branch_network_03.png" width="80%" height="30%" title="overview" alt="overview"></img> -->
-<div class="row">
-    <div class="col-sm mt-3 mt-md-0">
-        {% include figure.html path="assets/img/mask_branch_network_03.png" title="Template mask" class="img-fluid rounded z-depth-1" %}
-    </div>
-</div>
-<div class="caption">
-     How to make template mask by utilizing characteristics of target lesions
-</div>
 
  * * *
 
 ### **Experimental results**
-1. **Qualitative result**
-- Backbone network를 ResNet/DenseNet으로 세팅하여 평가하였고 두가지 방법 모두 제한된 조건내에서 성능향상을 확인할 수 있었다.
+- 3가지 biased dataset에 대해서 성능을 평가하였다
+1. **CelebA-HQ**
+-  30K의 유명인사들의 얼굴사진으로 이루어진 데이터셋. 머리길이를 bias로 하는 gender prediction 에 대한 성능을 평가 하였다.
 
-<!-- <p align="center"><img src="../../assets/img/mask_branch_network_04.png" alt="template_mask" width="80%" height="30%" title="overview"></img> -->
-<div class="row">
-    <div class="col-sm mt-3 mt-md-0">
-        {% include figure.html path="assets/img/mask_branch_network_04.png" title="ROC curves" class="img-fluid rounded z-depth-1" %}
-    </div>
+<div>
+    <center><img src="../../assets/img/ulub_04.jpg" alt="mask branch network intro" width="60%" height="60%"></center>
 </div>
 <div class="caption">
-     ROC curves of mask branch network(MBN) with DenseNet and ResNet
+     <center>Extreme bias sets on CelebA-HQ</center>
 </div>
 
-2. **Quantitative result**
-- Traning된 모델을 CAM(Class Activation Map)으로 비교해보았을 때에도 제안된 모델에서 병변에 더 focusing 하고 있음을 확인할 수 있다.
+- bias 되어있는 EB2에서 성능이 향상된 것을 확인할 수 있고, bias 되지 않은 EB setting에서도 성능이 떨어지지 않았음을 확인할 수 있다.
 
-<!-- <p align="center"><img src="../../assets/img/mask_branch_network_05.png" alt="template_mask" width="80%" height="30%" title="overview"></img> -->
-<div class="row">
-    <div class="col-sm mt-3 mt-md-0">
-        {% include figure.html path="assets/img/mask_branch_network_05.png" title="CAM2" class="img-fluid rounded z-depth-1" %}
-    </div>
+
+<center>
+
+|   Method | Base Model | HEX | Rebias | LfF | UBNet |
+| :------------ | :-------------: | ------------: |------------: |------------: |------------: |
+| Acc(EB1)      | 99.38 | 92.50 | 99.05 | 93.25 | 99.18 |
+| Acc(EB2)      | 51.22 | 50.85 | 55.57 | 56.70 | 58.22 |
+| Acc(Test)     | 75.30 | 71.68 | 77.31 | 74.98 | 78.70 |
+
+</center>
+
+2. **UTKface**
+- 20K의 얼굴 이미지 데이터셋으로 연령, 성별, 피부색이 분류되어 있다. 
+
+<div>
+    <center><img src="../../assets/img/ulub_05.jpg" alt="mask branch network intro" width="60%" height="60%"></center>
 </div>
 <div class="caption">
-      Class activation maps (CAMs) to show the effect of the mask branch network (MBN)
+     <center>Extreme bias sets on UTKFace</center>
 </div>
+
+- Gender가 편향된 Skin tone 예측과 Skin tone이 편향된 Gender 예측에서 모두 성능이 향상됨을 확인할 수 있었다.
+
+<div>
+    <center><img src="../../assets/img/ulub_utkface_table.png" alt="mask branch network intro" width="60%" height="60%"></center>
+</div>
+<div class="caption">
+     <center>Results on UTKFace</center>
+</div>
+
+3. **9-Class ImageNet**
+- ImageNet 데이터셋의 일부를 9class로 분류한 데이터 셋으로 texture에 대한 정보가 sub-label로 라벨링 되어 있다.
+<div>
+    <center><img src="../../assets/img/ulub_06.jpg" alt="mask branch network intro" width="60%" height="60%"></center>
+</div>
+<div class="caption">
+     <center>Extreme bias sets on UTKFace</center>
+</div>
+  
+- Biased 와 Unbiased ACC 에서 모두 높은 성능을 보였다. Biased에서 Rebias와 동일한 성능을 보였으나 Unbiased에서 더 높은 성능을 보였다.
+
+<center>
+
+|  Metric | Base model | SI | LM | RUBi | Rebias | LfF | UBNet
+| :----- | :------: |  :------: |  :------: |  :------: |  :------: |  :------: |  :------: | 
+| Biased | 90.8 | 88.4 | 64.1 | 90.5 | 91.9 | 89.0 | 91.9 | 
+| Unbiased | 88.8 | 86.6 | 62.7 | 88.6 | 90.5 | 88.2 | 91.5 |
+
+</center>
 
 ### **Conclusion**
-Breast mass의 특성을 활용한 Template mask와 Spatial information을 효과적으로 feature extractor에 integration 하도록 하는 Mask branch network는 ABUS 영상의 병변을 분류하는 모델의 학습에 적용되어 성능향상을 확인할 수 있었다.
+Training dataset 의 편향된 분포는 머신러닝 모델의 학습을 불안정하게 만든다. 본 연구에서 제안하는 UBNet은 추가적인 정보없이 모델의 hierarchical feature를 효과적으로 활용하여 편향된 Trainig set에서도 더욱 안정적인 training을 가능하게 하였다. 3가지 편향된 데이터 셋에서 실험을 통하여 그 효과를 입증하였다.
