@@ -79,7 +79,7 @@ Lung CT 영상내에서 Nodule의 악성도를 판별하는 기준중의 하나�
         }
 </style> -->
 
-<center>
+<!-- <center> -->
 
 <!-- |             | Solid | Part solid | Non solid |
 | :----------: | :----------: | :----------: | :----------: |
@@ -88,7 +88,7 @@ Lung CT 영상내에서 Nodule의 악성도를 판별하는 기준중의 하나�
 | Accuracy    | 92.5% | 91.6%      | 88.4%     |
 {: .tablelines} -->
 
-<table><thead>
+<table width ="400" height="100" align = "center"><thead>
 <tr>
 <th></th>
 <th>Solid</th>
@@ -97,21 +97,21 @@ Lung CT 영상내에서 Nodule의 악성도를 판별하는 기준중의 하나�
 </tr>
 </thead><tbody>
 <tr>
-<td>Sensitivity</td>
+<td >Sensitivity</td>
 <td>94.3%</td>
-<td>79.2%</td>
-<td>64.5%</td>
+<td align = "center">79.2%</td>
+<td align = "center">64.5%</td>
 </tr>
 <tr>
 <td>Specificity</td>
 <td>89.1%</td>
-<td>93.8%</td>
-<td>94.2%</td>
+<td align = "center">93.8%</td>
+<td align = "center">94.2%</td>
 </tr>
 <tr>
 <td>Accuracy</td>
 <td>92.5%</td>
-<td>91.6%</td>
-<td>88.4%</td>
+<td align = "center">91.6%</td>
+<td align = "center">88.4%</td>
 </tr>
 </tbody></table>
