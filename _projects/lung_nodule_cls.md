@@ -91,9 +91,9 @@ Lung CT 영상내에서 Nodule의 악성도를 판별하는 기준중의 하나�
 <table width ="400" height="100" align = "center"><thead>
 <tr>
 <th></th>
-<th>Solid</th>
-<th>Part solid</th>
-<th>Non solid</th>
+<th align = "center">Solid</th>
+<th align = "center">Part solid</th>
+<th align = "center">Non solid</th>
 </tr>
 </thead><tbody>
 <tr>

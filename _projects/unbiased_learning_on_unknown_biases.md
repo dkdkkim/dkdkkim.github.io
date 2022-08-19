@@ -14,7 +14,7 @@ category: work
 
 ---
 
-git repository link: [Mask branch network repository](https://github.com/dkdkkim/maskbranchnetwork)
+git repository link: [Unbias Network repository](https://github.com/dkdkkim/ubnet)
 
 paper link : [A Conservative Approach for Unbiased Learning on Unknown Biases
 , CVPR2022](https://openaccess.thecvf.com/content/CVPR2022/html/Jeon_A_Conservative_Approach_for_Unbiased_Learning_on_Unknown_Biases_CVPR_2022_paper.html)
