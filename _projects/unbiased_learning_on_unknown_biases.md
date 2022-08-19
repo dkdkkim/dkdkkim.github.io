@@ -93,56 +93,51 @@ ___
 
 - bias 되어있는 EB2에서 성능이 향상된 것을 확인할 수 있고, bias 되지 않은 EB setting에서도 성능이 떨어지지 않았음을 확인할 수 있다.
 
-<head>
-    <style>
-    table {
-        border-top: 1px solid #444444;
-        border-collapse: collapse;
-    }
-    th, td {
-        border-bottom: 1px solid #444444;
-        padding: 10px;
-    }
-    </style>
-</head>
-<body>
-    <table width ="400" height="100" align = "center"><thead>
-    <tr>
-    <th align = "center">Method</th>
-    <th align = "center">Base Model</th>
-    <th align = "center">HEX</th>
-    <th align = "center">Rebias</th>
-    <th align = "center">LfF</th>
-    <th align = "center">UBNet</th>
-    </tr>
-    </thead><tbody>
-    <tr>
-    <td >Sensitivity</td>
-    <td align = "center">99.38%</td>
-    <td align = "center">92.50%</td>
-    <td align = "center">99.05%</td>
-    <td align = "center">93.25%</td>
-    <td align = "center">99.18%</td>
-    </tr>
-    <tr>
-    <td>Specificity</td>
-    <td align = "center">51.22%</td>
-    <td align = "center">50.85%</td>
-    <td align = "center">55.57%</td>
-    <td align = "center">56.70%</td>
-    <td align = "center">58.22%</td>
-    </tr>
-    <tr>
-    <td>Accuracy</td>
-    <td align = "center">75.30%</td>
-    <td align = "center">71.68%</td>
-    <td align = "center">77.31%</td>
-    <td align = "center">74.98%</td>
-    <td align = "center">78.70%</td>
-    </tr>
-    </tbody></table>
-</body>
-
+<style>
+table {
+    border-top: 1px solid #444444;
+    border-collapse: collapse;
+}
+th, td {
+    border-bottom: 1px solid #444444;
+    padding: 10px;
+}
+</style>
+<table width ="400" height="100" align = "center"><thead>
+<tr>
+<th align = "center">Method</th>
+<th align = "center">Base Model</th>
+<th align = "center">HEX</th>
+<th align = "center">Rebias</th>
+<th align = "center">LfF</th>
+<th align = "center">UBNet</th>
+</tr>
+</thead><tbody>
+<tr>
+<td >Sensitivity</td>
+<td align = "center">99.38%</td>
+<td align = "center">92.50%</td>
+<td align = "center">99.05%</td>
+<td align = "center">93.25%</td>
+<td align = "center">99.18%</td>
+</tr>
+<tr>
+<td>Specificity</td>
+<td align = "center">51.22%</td>
+<td align = "center">50.85%</td>
+<td align = "center">55.57%</td>
+<td align = "center">56.70%</td>
+<td align = "center">58.22%</td>
+</tr>
+<tr>
+<td>Accuracy</td>
+<td align = "center">75.30%</td>
+<td align = "center">71.68%</td>
+<td align = "center">77.31%</td>
+<td align = "center">74.98%</td>
+<td align = "center">78.70%</td>
+</tr>
+</tbody></table>
 1. **UTKface**
 - 20K의 얼굴 이미지 데이터셋으로 연령, 성별, 피부색이 분류되어 있다. 
 
