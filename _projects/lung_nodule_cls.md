@@ -34,6 +34,8 @@ Lung CT 영상내에서 Nodule의 악성도를 판별하는 기준중의 하나�
 
 1. 정확도(Accuracy) 90% 이상
 2. Class 중 하나인 Part solid의 경우에는 실제로 판독의 사이에서 consensus가 낮은 편이므로 Solid / Non-solid 클래서의 성능을 우선으로 한다
+
+
 * * *
 ## Role in Project
 

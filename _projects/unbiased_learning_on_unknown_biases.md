@@ -94,57 +94,54 @@ ___
 - bias 되어있는 EB2에서 성능이 향상된 것을 확인할 수 있고, bias 되지 않은 EB setting에서도 성능이 떨어지지 않았음을 확인할 수 있다.
 
 <head>
-<style>
-  table {
-    width: 100%;
-    border-top: 1px solid #444444;
-    border-collapse: collapse;
-  }
-  th, td {
-    border-bottom: 1px solid #444444;
-    padding: 10px;
-  }
-</style>
+    <style>
+    table {
+        border-top: 1px solid #444444;
+        border-collapse: collapse;
+    }
+    th, td {
+        border-bottom: 1px solid #444444;
+        padding: 10px;
+    }
+    </style>
 </head>
 <body>
-<table width ="400" height="100" align = "center"><thead>
-<tr>
-<th align = "center">Method</th>
-<th align = "center">Solid</th>
-<th align = "center">Part solid</th>
-<th align = "center">Non solid</th>
-</tr>
-</thead><tbody>
-<tr>
-<td >Sensitivity</td>
-<td>94.3%</td>
-<td align = "center">79.2%</td>
-<td align = "center">64.5%</td>
-</tr>
-<tr>
-<td>Specificity</td>
-<td>89.1%</td>
-<td align = "center">93.8%</td>
-<td align = "center">94.2%</td>
-</tr>
-<tr>
-<td>Accuracy</td>
-<td>92.5%</td>
-<td align = "center">91.6%</td>
-<td align = "center">88.4%</td>
-</tr>
-</tbody></table>
+    <table width ="400" height="100" align = "center"><thead>
+    <tr>
+    <th align = "center">Method</th>
+    <th align = "center">Base Model</th>
+    <th align = "center">HEX</th>
+    <th align = "center">Rebias</th>
+    <th align = "center">LfF</th>
+    <th align = "center">UBNet</th>
+    </tr>
+    </thead><tbody>
+    <tr>
+    <td >Sensitivity</td>
+    <td align = "center">99.38%</td>
+    <td align = "center">92.50%</td>
+    <td align = "center">99.05%</td>
+    <td align = "center">93.25%</td>
+    <td align = "center">99.18%</td>
+    </tr>
+    <tr>
+    <td>Specificity</td>
+    <td align = "center">51.22%</td>
+    <td align = "center">50.85%</td>
+    <td align = "center">55.57%</td>
+    <td align = "center">56.70%</td>
+    <td align = "center">58.22%</td>
+    </tr>
+    <tr>
+    <td>Accuracy</td>
+    <td align = "center">75.30%</td>
+    <td align = "center">71.68%</td>
+    <td align = "center">77.31%</td>
+    <td align = "center">74.98%</td>
+    <td align = "center">78.70%</td>
+    </tr>
+    </tbody></table>
 </body>
-<center>
-
-
-|   Method | Base Model | HEX | Rebias | LfF | UBNet |
-| :------------ | :-------------: | ------------: |------------: |------------: |------------: |
-| Acc(EB1)      | 99.38 | 92.50 | 99.05 | 93.25 | 99.18 |
-| Acc(EB2)      | 51.22 | 50.85 | 55.57 | 56.70 | 58.22 |
-| Acc(Test)     | 75.30 | 71.68 | 77.31 | 74.98 | 78.70 |
-
-</center>
 
 1. **UTKface**
 - 20K의 얼굴 이미지 데이터셋으로 연령, 성별, 피부색이 분류되어 있다. 
@@ -176,14 +173,39 @@ ___
   
 - Biased 와 Unbiased ACC 에서 모두 높은 성능을 보였다. Biased에서 Rebias와 동일한 성능을 보였으나 Unbiased에서 더 높은 성능을 보였다.
 
-<center>
-
-|  Metric | Base model | SI | LM | RUBi | Rebias | LfF | UBNet
-| :----- | :------: |  :------: |  :------: |  :------: |  :------: |  :------: |  :------: | 
-| Biased | 90.8 | 88.4 | 64.1 | 90.5 | 91.9 | 89.0 | 91.9 | 
-| Unbiased | 88.8 | 86.6 | 62.7 | 88.6 | 90.5 | 88.2 | 91.5 |
-
-</center>
+<table width ="400" height="100" align = "center"><thead>
+<tr>
+<th align = "center">Metric</th>
+<th align = "center">Base mode</th>
+<th align = "center">SI</th>
+<th align = "center">LM</th>
+<th align = "center">RUBi</th>
+<th align = "center">Rebias</th>
+<th align = "center">LfF</th>
+<th align = "center">UBNet</th>
+</tr>
+</thead><tbody>
+<tr>
+<td align = "center">Biased</td>
+<td align = "center">90.8%</td>
+<td align = "center">88.4%</td>
+<td align = "center">64.1%</td>
+<td align = "center">90.5%</td>
+<td align = "center">91.9%</td>
+<td align = "center">89.0%</td>
+<td align = "center">91.9%</td>
+</tr>
+<tr>
+<td align = "center">Unbiased</td>
+<td align = "center">88.8%</td>
+<td align = "center">86.6%</td>
+<td align = "center">62.7%</td>
+<td align = "center">88.6%</td>
+<td align = "center">90.5%%</td>
+<td align = "center">88.2%</td>
+<td align = "center">91.5%</td>
+</tr>
+</tbody>
 
 ### **Conclusion**
 Training dataset 의 편향된 분포는 머신러닝 모델의 학습을 불안정하게 만든다. 본 연구에서 제안하는 UBNet은 추가적인 정보없이 모델의 hierarchical feature를 효과적으로 활용하여 편향된 Trainig set에서도 더욱 안정적인 training을 가능하게 하였다. 3가지 편향된 데이터 셋에서 실험을 통하여 그 효과를 입증하였다.
