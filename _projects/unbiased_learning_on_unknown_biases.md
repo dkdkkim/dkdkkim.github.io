@@ -93,8 +93,50 @@ ___
 
 - bias 되어있는 EB2에서 성능이 향상된 것을 확인할 수 있고, bias 되지 않은 EB setting에서도 성능이 떨어지지 않았음을 확인할 수 있다.
 
-
+<head>
+<style>
+  table {
+    width: 100%;
+    border-top: 1px solid #444444;
+    border-collapse: collapse;
+  }
+  th, td {
+    border-bottom: 1px solid #444444;
+    padding: 10px;
+  }
+</style>
+</head>
+<body>
+<table width ="400" height="100" align = "center"><thead>
+<tr>
+<th align = "center">Method</th>
+<th align = "center">Solid</th>
+<th align = "center">Part solid</th>
+<th align = "center">Non solid</th>
+</tr>
+</thead><tbody>
+<tr>
+<td >Sensitivity</td>
+<td>94.3%</td>
+<td align = "center">79.2%</td>
+<td align = "center">64.5%</td>
+</tr>
+<tr>
+<td>Specificity</td>
+<td>89.1%</td>
+<td align = "center">93.8%</td>
+<td align = "center">94.2%</td>
+</tr>
+<tr>
+<td>Accuracy</td>
+<td>92.5%</td>
+<td align = "center">91.6%</td>
+<td align = "center">88.4%</td>
+</tr>
+</tbody></table>
+</body>
 <center>
+
 
 |   Method | Base Model | HEX | Rebias | LfF | UBNet |
 | :------------ | :-------------: | ------------: |------------: |------------: |------------: |
@@ -104,7 +146,7 @@ ___
 
 </center>
 
-2. **UTKface**
+1. **UTKface**
 - 20K의 얼굴 이미지 데이터셋으로 연령, 성별, 피부색이 분류되어 있다. 
 
 <div>
