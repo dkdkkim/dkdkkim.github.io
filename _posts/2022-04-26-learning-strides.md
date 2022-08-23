@@ -107,6 +107,9 @@ Spectral pooling의 경우 정보손실량을 줄인다는 점에서 이점이 �
 </div>
 
 그리고 실험결과를 보면 일부 stride의 initial의 경우에는 DiffStride의 성능이 더 떨어지는 경우가 발생하는데 이는 layer depth가 더 많아지고 initial stride 의 경우의 수가 많아질때에는 intial stride 자체가 새로운 hyperparameter 가 되는 문제가 발생할 수도 있다고 개인적으로 생각한다.
+
+---
+
 ## Reference
 
 - [Riad, Rachid, et al. "Learning strides in convolutional neural networks." arXiv preprint arXiv:2202.01653 (2022).](https://arxiv.org/abs/2202.01653)
