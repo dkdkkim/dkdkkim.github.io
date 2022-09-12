@@ -208,5 +208,7 @@ th, td {
 </tbody>
 </table>
 
+___
+
 ### **Conclusion**
 Training dataset 의 편향된 분포는 머신러닝 모델의 학습을 불안정하게 만든다. 본 연구에서 제안하는 UBNet은 추가적인 정보없이 모델의 hierarchical feature를 효과적으로 활용하여 편향된 Trainig set에서도 더욱 안정적인 training을 가능하게 하였다. 3가지 편향된 데이터 셋에서 실험을 통하여 그 효과를 입증하였다.
