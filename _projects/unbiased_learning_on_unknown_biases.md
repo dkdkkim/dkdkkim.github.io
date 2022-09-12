@@ -81,7 +81,8 @@ ___
 
 ### **Experimental results**
 - 3가지 biased dataset에 대해서 성능을 평가하였다
-1. **CelebA-HQ**
+  
+#### **1. CelebA-HQ**
    
 -  30K의 유명인사들의 얼굴사진으로 이루어진 데이터셋. 머리길이를 bias로 하는 gender prediction 에 대한 성능을 평가 하였다.
 
@@ -140,7 +141,7 @@ th, td {
 </tr>
 </tbody></table>
 
-2. **UTKface**
+#### **2. UTKface**
 
 - 20K의 얼굴 이미지 데이터셋으로 연령, 성별, 피부색이 분류되어 있다. 
 
@@ -160,7 +161,7 @@ th, td {
      <center>Results on UTKFace</center>
 </div>
 
-3. **9-Class ImageNet**
+#### **3. 9-Class ImageNet**
 
 - ImageNet 데이터셋의 일부를 9class로 분류한 데이터 셋으로 texture에 대한 정보가 sub-label로 라벨링 되어 있다.
 <div>
@@ -205,6 +206,7 @@ th, td {
 <td align = "center">91.5%</td>
 </tr>
 </tbody>
+</table>
 
 ### **Conclusion**
 Training dataset 의 편향된 분포는 머신러닝 모델의 학습을 불안정하게 만든다. 본 연구에서 제안하는 UBNet은 추가적인 정보없이 모델의 hierarchical feature를 효과적으로 활용하여 편향된 Trainig set에서도 더욱 안정적인 training을 가능하게 하였다. 3가지 편향된 데이터 셋에서 실험을 통하여 그 효과를 입증하였다.
