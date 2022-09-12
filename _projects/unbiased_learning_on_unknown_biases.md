@@ -82,6 +82,7 @@ ___
 ### **Experimental results**
 - 3가지 biased dataset에 대해서 성능을 평가하였다
 1. **CelebA-HQ**
+   
 -  30K의 유명인사들의 얼굴사진으로 이루어진 데이터셋. 머리길이를 bias로 하는 gender prediction 에 대한 성능을 평가 하였다.
 
 <div>
@@ -138,7 +139,9 @@ th, td {
 <td align = "center">78.70%</td>
 </tr>
 </tbody></table>
-1. **UTKface**
+
+2. **UTKface**
+
 - 20K의 얼굴 이미지 데이터셋으로 연령, 성별, 피부색이 분류되어 있다. 
 
 <div>
@@ -158,6 +161,7 @@ th, td {
 </div>
 
 3. **9-Class ImageNet**
+
 - ImageNet 데이터셋의 일부를 9class로 분류한 데이터 셋으로 texture에 대한 정보가 sub-label로 라벨링 되어 있다.
 <div>
     <center><img src="../../assets/img/ulub_06.jpg" alt="mask branch network intro" width="60%" height="60%"></center>
