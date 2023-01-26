@@ -22,73 +22,110 @@ ViT가 small-scale dataset을 학습하는 데에 어려움을 겪고 있는 이
     <center><img src="../../../assets/img/small01.gif" alt="rego_approach" width="60%" height="60%"></center>
 </div>
 <div class="caption">
-     <center>Concept of REcurrent glimpse-based decoder (REGO)</center>
+     <center>Concept of DINO</center>
 </div>
 
 ---
 
 ## **Method**
-REGO model의 전체적인 workflow는 DETR의 출력물인 $$ O_{box} $$와 feature $$ H_{dec} $$을 입력으로 받아 $$N$$개의 step의 반복을 통해서 최종적인 prediction을 하게 되며, 각각의 step은 Glimpse-based Decoder로 구성되어있다.
+앞서 말했듯이 본 논문의 핵심은 Self-supervised learning을 통해 효과적인 initial weight 를 찾는 것이다. 따라서 제안하는 방법은 크게 Self-supervised learning 하는 과정과 이때의 weight 값을 활용하여 supervised learning 하는 두가지로 나누어 볼 수 있다.
+
+### Self-supervised View Prediction as Weight Initialization Scheme
+먼저 Initial weight 를 찾기위한 Self-supervised learning 과정을 보면 아래와 같다. DINO와 마찬가지로 student model과 teacher model의 동일한 두 모델로 이루어져있다.
 
 <div>
-    <center><img src="../../../assets/img/rego02.png" alt="rego_method" width="70%" height="70%"></center>
+    <center><img src="../../../assets/img/small02.png" alt="rego_method" width="70%" height="70%"></center>
 </div>
 <div class="caption">
-     <center>The overview of the REGO</center>
+     <center>Self-supervised View Prediction as Weight Initialization Scheme</center>
 </div>
 
-### Glimpse-based Decoder
+학습을 위해 Input image 에서 local view와 global view 두가지의 image를 생성한다. local view $$ x_l $$는 원본이미지의 20~50%의 크기의 crop 된 이미지이고 global view $$ x_g $$는 원본이미지의 50%크기 이상인 이미지로 $$ x_l $$과 $$x_g$$의 비율은 1:4가 되도록 한다. 모든 이미지는 color jittering, gray scaling, solarization, random hrizontal flip and gausian blur를 포함한 standar augmentation을 적용한다.
 
-DETR의 output 또는 이전 block의 출력값중 $$O_{box}(i-1)$$을 이용하여 해당영역에서 feature를 추출하게 된다. 이때에 box 값을 그대로 사용하는 것이 아니라 margin을 갖고 조금더 넓은 영역에서 feature를 추출하는데 Diagram에서 Enlarge라고 표시된 부분이다. 이때 enlarge 하는 비율을 나타내는 glimpse scale $$\alpha$$ 는 점점 감소하게 되는데 3step일 경우를 예로 들면 $$\alpha=3,2,1$$ 이된다.
+모든 image는 DPE를 통해 position embeding을 해주고 student model $$ F_s $$에 입력된다. teacher model $$ F_g $$에는 global view 만 입력되게 된다. 각각의 모델은 모두 ViT이고 ViT 뒤에 MLP head를 통과 하게 된다. MLP head는 3개의 linear layer로 구성되어 있고, single layer 보다 multi layer가 더 좋은 성능을 보인다고 한다.
+
+각각의 모델에서의 출력값 $$F_s(x_l)$$, $$F_s(x_l)$$, $$F_t(x_g)$$ 이 생성된다. student model은 이 출력값들을 활용하여 아래의 cost function을 통해서 update 된다.
+
+$$
+\mathfrak{L}=-\widetilde{F}_{g_t}\cdot \log(\widetilde{F}_{g_s})+\sum_{i=1}^{n}-\widetilde{F}_{g_t}\cdot \log(\widetilde{F}^{(i)}_{l_s})
+$$
+
+teacher model $$F_t$$는  일반적인 teacher-student 학습처럼 아래의 수식대로 두모델의 weight $$\{theta}_{s}$$, $${\theta}_{t}$$ 의 exponential moving average를 이용하여 업데이트 된다.
+
+$$
+{\theta}_{t} \leftarrow \lambda{\theta}_{t}+(1-\lambda{\theta}_{s})
+$$
+
+### Self-supervised to Supervised Label Prediction
+Self-supervised learning을 통해서 학습된 teacher 모델의 weight를 초기값으로 하여 supervised learning을 하는 과정이다. 이 과정은 일반적인 ViT의 학습과정과 유사하며 CE loss로 학습을 진행한다.
 
 <div>
-    <center><img src="../../../assets/img/rego03.png" alt="rego_method" width="30%" height="30%"></center>
+    <center><img src="../../../assets/img/small03.png" alt="small03" width="70%" height="70%"></center>
 </div>
 <div class="caption">
-     <center>Enlarge step of Glimpse-based Decoder</center>
-</div>
-
-이렇게 해당 RoI에서 추출된 feature $$V(i)$$는 query 값이 되고 이전 block으로 부터의 feature $$Hec(i-1)$$ 은 Linear Projection으로 dimension 조정 후 key, value 값이 되어 Multi-head cross attention 후 $$H_{g}(i)$$ 가 된다. $$H_{g}(i)$$ 와 $$Hec(i-1)$$를 concatenation을 통해 하나의 feature로 만들고 MLP를 통해서 새로운 Detected Boxes $$O_{box}(i)$$, Classification Output $$O_{cls}(i)$$ 그리고 Decoding Output $$H_{dec}(i)$$ 를 출력하게 된다.
-
-### Multi-stage Reccurent Processing
-이런 glimpes-based Decoder를 $N$번 반복하여 ReGO model 이 완성되며 중간과정에서는 box와 feature 만 사용되지만 마지막 블럭에서는 classification 값까지 최종 예측값으로 사용된다. 본논문에서 일반적으로 step의 수 $N$은 3을 사용하였으며, 이는 실험적으로 선택된 것으로 보인다.
-
-<div class="row mt-3">
-    <div class="col-sm mt-3 mt-md-0">
-        {% include figure.html path="assets/img/rego04.png" class="img-fluid rounded z-depth-1" %}
-    </div>
-    <div class="col-sm mt-3 mt-md-0">
-        {% include figure.html path="assets/img/rego05.png" class="img-fluid rounded z-depth-1" %}
-    </div>
-</div>
-<div class="caption">
-     Hyper-parameter study of the number of stages in REGO and  the glimpse scale in REGO
+     <center>Self-supervised to Supervised Label Prediction</center>
 </div>
 
 ---
 
 ## **Experimental result**
-MS COCO validation split에서 35, 50 epoch에서의 결과를 아래와 같이 여러가지 existing Object Detection 모델들과 비교했으며, 관심을 가지고 보아야할 부분은 일반적인 DETR과 앞서 Training 문제를 개선한 [Deformable DETR](https://arxiv.org/abs/2010.04159) 과의 비교이다.
+CIFAR나 Tiny-ImageNet 과 같은 small-scale dataset은 32 또는 64 와 같이 낮은 해상도를 가지고 있다. 따라서 실험에 사용되는 모델의 patch size와 이에 따른 모델의 구조를 아래와 같이 수정하였다.
 
 <div>
-    <center><img src="../../../assets/img/rego06.png" alt="rego_method" width="60%" height="60%"></center>
+    <center><img src="../../../assets/img/small04.png" alt="small_exp_set" width="60%" height="60%"></center>
 </div>
 <div class="caption">
-     <center>Results of different detectors on the MS COCO val split</center>
+     <center>Details of
+ViT encoders used in
+our proposed training
+approach</center>
 </div>
 
-표에서 보면 알 수 있듯이 DETR 은 물론이도 Deformable DETR 보다도 동일 epoch을 training 했을 때 높은 성능을 보임을 알 수 있다. 심지어 동일한 ResNet 50 backbone 기준으로 보았을 때에 REGO로 36 epoch을 training 했을 때 성능(44.8)이 Deformable DETR 의 성능(43.8) 보다 높은 것까지도 확인할 수 있다.
+실험에는 아래와 같이 7개의 small-scale dataset이 사용되었다.
+
+<div>
+    <center><img src="../../../assets/img/small05.png" alt="small_exp_set" width="60%" height="60%"></center>
+</div>
+<div class="caption">
+     <center>Details of datasets</center>
+</div>
+
+실험결과는 아래와 같이 대부분의 실험에 사용된 데이터셋에 대해서 다른 모델보다 높은 성능을 보이는 것을 알 수 있다.Comparison model로는 Dense relative localization task를 활용한 [ViT-Drloc](https://arxiv.org/pdf/2106.03746.pdf)과 Shifted Patch Tokenization과 Locality Self-Attention을 활용한 [SL-ViT](https://arxiv.org/pdf/2112.13492.pdf)가 있다.
+
+
+<div>
+    <center><img src="../../../assets/img/small06.png" alt="small_exp_set" width="60%" height="60%"></center>
+</div>
+<div class="caption">
+     <center>Comparison Performance</center>
+</div>
+
+특히 salient object에 대해서 높은 성능을 보이는데 feature map의 시각화한 아래 결과를 보면 본연구에서 제안한 모델이 주변부대비 salient object 가 더 잘 활성화 되어 있는 것을 확인할 수 있다.
+
+더 적은 데이터를 활용한 실험결과도 확인할 수 있는데 CIFAR10, CIFAR100의 25%,50%,75%의 데이터로 학습한 결과를 비교해보아도 더 좋은 성능을 보인 것을 확인할 수 있다.
+
+<div class="row mt-3">
+    <div class="col-sm mt-3 mt-md-0">
+        {% include figure.html path="assets/img/small07.png" class="img-fluid rounded z-depth-1" %}
+    </div>
+    <div class="col-sm mt-3 mt-md-0">
+        {% include figure.html path="assets/img/small08.png" class="img-fluid rounded z-depth-1" %}
+    </div>
+</div>
+<div class="caption">
+     Ablation studies results
+</div>
 
 ---
 
-## **Limitations**
-본 논문에서 저자도 언급했지만, REGO를 통해서 DETR의 학습 효율은 많이 개선되었지만 여전히 training 하는데에 수 일이 소요되기 때문에 앞으로도 개선의 여지는 남아있다고 볼 수 있다.
-그리고 개인적으로는 본 논문에서 성능 검증에 사용된 지표는 validation split의 결과여서 test split에서의 성능의 검증이 필요하고, 50 epoch이상 training 하여 최종적으로 optimized 된 성능의 비교도 확인할 필요가 있다고 생각한다.
+## **Comments**
+ViT 는 제안된지 오래된 알고리즘에도 불구하고 지금까지도 활발한 연구가 진행되고 있다. SOTA model은 ViT가 차지 한지 오래되었지만 처음에 제안되었을 때부터 가지고 있는 몇가지 한계점도 있었다. 그중 하나였던 small dataset에 대한 문제도 리뷰한 논문뿐만 아니라 여러가지 연구에서 해결하기 위해 다양한 방법을 제안하고 있다. 물론 아직도 여전히 완전히 해결된 것 처럼보이지는 않지만 조금씩 그 단점이 보완되고 있기 때문에 앞으로도 혁신적인 알고리즘이 나오기 전까지는 ViT가 대세일 것으로 보인다.
 
 ---
 
 ## Reference
-
-- [Chen, Zhe, Jing Zhang, and Dacheng Tao. "Recurrent glimpse-based decoder for detection with transformer." Proceedings of the IEEE/CVF Conference on Computer Vision and Pattern Recognition. 2022.](https://openaccess.thecvf.com/content/CVPR2022/html/Chen_Recurrent_Glimpse-Based_Decoder_for_Detection_With_Transformer_CVPR_2022_paper.html)
-- [Carion, Nicolas, et al. "End-to-end object detection with transformers." European conference on computer vision. Springer, Cham, 2020.](https://www.google.com/url?sa=t&rct=j&q=&esrc=s&source=web&cd=&cad=rja&uact=8&ved=2ahUKEwjMmPaL3tz5AhVIQt4KHf0tBMUQFnoECAkQAQ&url=https%3A%2F%2Farxiv.org%2Fabs%2F2005.12872&usg=AOvVaw1fNz92-EEj1d91Nfiv875y)
-- [Zhu, Xizhou, et al. "Deformable detr: Deformable transformers for end-to-end object detection." arXiv preprint arXiv:2010.04159 (2020).](https://arxiv.org/abs/2010.04159)
+- 
+- [Caron, Mathilde, et al. "Emerging properties in self-supervised vision transformers." Proceedings of the IEEE/CVF international conference on computer vision. 2021.](https://arxiv.org/pdf/2104.14294.pdf)
+- [Gani, Hanan, Muzammal Naseer, and Mohammad Yaqub. "How to Train Vision Transformer on Small-scale Datasets?." arXiv preprint arXiv:2210.07240 (2022).](https://arxiv.org/pdf/2210.07240.pdf)
+- [Lee, Seung Hoon, Seunghyun Lee, and Byung Cheol Song. "Vision transformer for small-size datasets." arXiv preprint arXiv:2112.13492 (2021).](https://arxiv.org/pdf/2112.13492.pdf)
+- [Liu, Yahui, et al. "Efficient training of visual transformers with small datasets." Advances in Neural Information Processing Systems 34 (2021): 23818-23830.](https://arxiv.org/pdf/2106.03746.pdf)
