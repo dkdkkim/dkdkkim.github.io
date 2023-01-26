@@ -1,6 +1,6 @@
 ---
 layout: post
-title: Vision Transformer Training on Small Datasets
+title: How to Train Vision Transformer Training on Small Datasets
 date:   2022-10-21 00:00:00
 description: Proposed method serves as an effective weights initialization to successfully train ViTs from scratch, thus eliminating the need for large-scale pre-training.
 tags: review
@@ -50,7 +50,7 @@ $$
 \mathfrak{L}=-\widetilde{F}_{g_t}\cdot \log(\widetilde{F}_{g_s})+\sum_{i=1}^{n}-\widetilde{F}_{g_t}\cdot \log(\widetilde{F}^{(i)}_{l_s})
 $$
 
-teacher model $$F_t$$는  일반적인 teacher-student 학습처럼 아래의 수식대로 두모델의 weight $$\{theta}_{s}$$, $${\theta}_{t}$$ 의 exponential moving average를 이용하여 업데이트 된다.
+teacher model $$F_t$$는  일반적인 teacher-student 학습처럼 아래의 수식대로 두모델의 weight $${\theta}_{s}$$, $${\theta}_{t}$$ 의 exponential moving average를 이용하여 업데이트 된다.
 
 $$
 {\theta}_{t} \leftarrow \lambda{\theta}_{t}+(1-\lambda{\theta}_{s})
@@ -60,7 +60,7 @@ $$
 Self-supervised learning을 통해서 학습된 teacher 모델의 weight를 초기값으로 하여 supervised learning을 하는 과정이다. 이 과정은 일반적인 ViT의 학습과정과 유사하며 CE loss로 학습을 진행한다.
 
 <div>
-    <center><img src="../../../assets/img/small03.png" alt="small03" width="70%" height="70%"></center>
+    <center><img src="../../../assets/img/small03.png" alt="small03" width="50%" height="50%"></center>
 </div>
 <div class="caption">
      <center>Self-supervised to Supervised Label Prediction</center>
@@ -102,18 +102,20 @@ approach</center>
 
 특히 salient object에 대해서 높은 성능을 보이는데 feature map의 시각화한 아래 결과를 보면 본연구에서 제안한 모델이 주변부대비 salient object 가 더 잘 활성화 되어 있는 것을 확인할 수 있다.
 
-더 적은 데이터를 활용한 실험결과도 확인할 수 있는데 CIFAR10, CIFAR100의 25%,50%,75%의 데이터로 학습한 결과를 비교해보아도 더 좋은 성능을 보인 것을 확인할 수 있다.
-
-<div class="row mt-3">
-    <div class="col-sm mt-3 mt-md-0">
-        {% include figure.html path="assets/img/small07.png" class="img-fluid rounded z-depth-1" %}
-    </div>
-    <div class="col-sm mt-3 mt-md-0">
-        {% include figure.html path="assets/img/small08.png" class="img-fluid rounded z-depth-1" %}
-    </div>
+<div>
+    <center><img src="../../../assets/img/small07.png" alt="small_exp_set" width="60%" height="60%"></center>
 </div>
 <div class="caption">
-     Ablation studies results
+     <center>Comparison with salient objects</center>
+</div>
+
+더 적은 데이터를 활용한 실험결과도 확인할 수 있는데 CIFAR10, CIFAR100의 25%,50%,75%의 데이터로 학습한 결과를 비교해보아도 더 좋은 성능을 보인 것을 확인할 수 있다.
+
+<div>
+    <center><img src="../../../assets/img/small08.png" alt="small_exp_set" width="60%" height="60%"></center>
+</div>
+<div class="caption">
+     <center>Training with part of small dataset</center>
 </div>
 
 ---
