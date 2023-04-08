@@ -52,26 +52,36 @@
 - title: Projects & Publications
   type: nested_list
   contents:
+    - title: Malignancy classification and scoring system
+      items:
+        - Analysis algorithm for breast lesions with scoring
+        - Classification and model calibration
+        - Python, Pytorch
+    - title: Breast Cancer Detection For Automated Breast Ultrasound
+      items:
+        - Computer-aided detection system for ABUS
+        - Approved and serviced in Korea
+        - Python, Pytorch, Mysql
+    - title: A Conservative Approach for Unbiased Learning on Unknown Biases
+      items:
+        - CVPR 2022 accepted(co 1st author)
+        - De-bias approach that does not necessitate a predefined bias
+        - Python, Pytorch
+    - title: Weakly Supervised Branch Network With Template Mask for Classifying Masses in 3D Automated Breast Ultrasound
+      items:
+        - WACV 2022 accepted(1st author)
+        - a novel branch network architecture incorporating segmentation information of masses in the training process
+        - Python, Tensorflow
+    - title: Lung CT nodule type classification
+      items:
+        - Built a 3D CNN model for classfying 3 types of lung cancers on CT image
+        - A CNN model, attention modules and an ensemble  method are applied
+        - Python, tensorflow
     - title: OLED optical compensation algorithm
       items:
         - LG Display
         - C++, mfc
         - Design the algorithm for operating OLED module at target status
-    - title: Lung CT nodule type classification
-      items:
-        - Python, tensorflow
-        - Built a 3D DNN model for classfying 3 types of lung cancers on CT image
-        - A CNN model, attention modules and an ensemble  method are applied
-    - title: Weakly Supervised Branch Network With Template Mask for Classifying Masses in 3D Automated Breast Ultrasound
-      items:
-        - WACV 2022 accepted(1st author)
-        - Python, tensorflow
-        - a novel branch network architecture incorporating segmentation information of masses in the training process
-    - title: A Conservative Approach for Unbiased Learning on Unknown Biases
-      items:
-        - CVPR 2022 accepted(co 1st author)
-        - Python, Pytorch
-        - De-bias approach that does not necessitate a predefined bias
 
 # - title: Open Source Projects
 #   type: time_table
